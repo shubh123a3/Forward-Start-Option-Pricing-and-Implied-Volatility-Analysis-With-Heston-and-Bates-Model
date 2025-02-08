@@ -1,52 +1,94 @@
-Forward-Start Option Pricing and Implied Volatility Analysis with Heston and Bates Models
+# Forward-Start Option Pricing and Implied Volatility Analysis With Heston and Bates Model
 
-Overview
+## Overview
+This project implements the pricing of forward-start options and analyzes implied volatility using the Heston and Bates models. It provides a Streamlit application for user-friendly interaction with model parameters.
 
-This project explores forward-start option pricing using the Heston and Bates models. It provides an interactive Streamlit dashboard to analyze implied volatility (IV) behavior for short-term and long-term options and observe the impact of jump parameters. The models are implemented in Python using NumPy, SciPy, and Matplotlib.
+## Features
+- **Heston Model:** Captures stochastic volatility effects.
+- **Bates Model:** Extends Heston by incorporating jumps.
+- **Forward-Start Option Pricing:** Valuation of options that begin at a future date.
+- **Implied Volatility Analysis:** Visualizing the effect of model parameters on volatility.
 
-Features
+## Heston Model
+The Heston model describes the dynamics of an asset price \( S_t \) with stochastic volatility \( v_t \) as:
 
-Heston Model Implementation: Computes option prices and implied volatility using the stochastic volatility model.
+\[
+\begin{aligned}
+    dS_t &= \mu S_t dt + \sqrt{v_t} S_t dW_t^S, \\
+    dv_t &= \kappa (\theta - v_t) dt + \sigma \sqrt{v_t} dW_t^v,
+\end{aligned}
+\]
 
-Bates Model Implementation: Extends the Heston model by incorporating jump diffusion effects.
+where:
+- \( \mu \) is the drift rate.
+- \( \kappa \) is the mean reversion speed.
+- \( \theta \) is the long-term variance.
+- \( \sigma \) is the volatility of volatility.
+- \( W_t^S \) and \( W_t^v \) are two correlated Wiener processes with correlation \( \rho \).
 
-Forward-Start Option Pricing: Evaluates forward-start options under stochastic volatility.
+## Bates Model
+The Bates model extends Heston by adding jump components:
 
-Implied Volatility Analysis: Compares short-term and long-term IV surfaces for different parameter settings.
+\[
+\begin{aligned}
+    dS_t &= \mu S_t dt + \sqrt{v_t} S_t dW_t^S + S_t (e^{J} - 1) dN_t, \\
+    dv_t &= \kappa (\theta - v_t) dt + \sigma \sqrt{v_t} dW_t^v.
+\end{aligned}
+\]
 
-Interactive Streamlit Dashboard: Visualizes results dynamically based on user input.
+where:
+- \( J \) represents the jump size, usually normally distributed as \( J \sim \mathcal{N}(\mu_J, \sigma_J^2) \).
+- \( N_t \) is a Poisson process with intensity \( \lambda_J \), dictating the frequency of jumps.
 
-Mathematical Formulation
+## Forward-Start Option Pricing
+A forward-start option has a strike set at a future date \( T_0 \), usually defined as:
 
-1. Heston Model
+\[
+K = S_{T_0} e^{m}
+\]
 
-The Heston stochastic volatility model is given by:
+where \( m \) is a predetermined fraction. The Black-Scholes price for a forward-start call option is given by:
 
-
+\[
+C = S_0 e^{-qT} N(d_1) - K e^{-rT} N(d_2),
+\]
 
 where:
 
- is the underlying asset price.
+\[
+\begin{aligned}
+    d_1 &= \frac{\ln \left( \frac{S_0}{K} \right) + \left( r - q + \frac{\sigma^2}{2} \right) T}{\sigma \sqrt{T}}, \\
+    d_2 &= d_1 - \sigma \sqrt{T}.
+\end{aligned}
+\]
 
- is the stochastic variance.
+## Streamlit App
+The Streamlit application provides:
+- Interactive parameter tuning for both models.
+- Visualization of implied volatility surfaces.
+- Forward-start option pricing output.
 
- is the drift of the asset price.
+## Installation
+Clone the repository and install dependencies:
+```bash
+pip install -r requirements.txt
+```
+Run the Streamlit app:
+```bash
+streamlit run app.py
+```
 
- is the mean-reversion rate of variance.
+## Usage
+1. Choose between Heston or Bates model.
+2. Adjust parameters using sliders.
+3. Observe the effect on implied volatility.
+4. Compute forward-start option prices.
 
- is the long-term mean variance.
+## References
+- Heston, S. L. (1993). A Closed-Form Solution for Options with Stochastic Volatility.
+- Bates, D. S. (1996). Jumps and Stochastic Volatility in Exchange Rate Models.
 
- is the volatility of variance (vol of vol).
+---
 
- is the correlation between the Brownian motions.
-
-Characteristic Function of Heston Model
-
-The characteristic function of the Heston model is given by:
-
-
-
-where:
-
-
+This project serves as a valuable tool for understanding the impact of stochastic volatility and jump processes on option pricing.
 
