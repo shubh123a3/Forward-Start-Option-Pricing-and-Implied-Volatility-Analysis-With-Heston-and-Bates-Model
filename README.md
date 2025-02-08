@@ -1,4 +1,4 @@
-Forward-Start Option Pricing and Implied Volatility Analysis with Heston and Bates Models
+## Forward-Start Option Pricing and Implied Volatility Analysis with Heston and Bates Models
 
 ## Overview
 
