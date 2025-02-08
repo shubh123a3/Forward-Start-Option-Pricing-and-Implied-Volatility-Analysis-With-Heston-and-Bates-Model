@@ -2,6 +2,10 @@
 
 ## Overview
 
+
+https://github.com/user-attachments/assets/7baffd8b-f481-47cb-ae0d-fd07ee8d22ed
+
+
 This project explores forward-start option pricing using the Heston and Bates models. It provides an interactive Streamlit dashboard to analyze implied volatility (IV) behavior for short-term and long-term options and observe the impact of jump parameters. The models are implemented in Python using NumPy, SciPy, and Matplotlib.
 
 ## Features
